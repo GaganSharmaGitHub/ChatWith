@@ -4,6 +4,7 @@ import Loader from './components/loader'
 import ChatList from './components/chatList'
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
 import CreateChat from './components/createChat'
+import LoginForm from './components/loginForm'
 import TextField from './components/textField.js'
 import{tokenURL, instanceLocator}from './config'
 var roomId='1044687d-e917-4c04-857b-dd89a67fa2eb'
@@ -16,13 +17,18 @@ class App extends React.Component{
      roomAndUser:{
        roomId: roomId,
        user: 'Gagan'
-     }
+     },
+     loggedIn: false
    }
 
    this.sendMessage = this.sendMessage.bind(this)
    this.changeRoom = this.changeRoom.bind(this)
  }
  componentDidMount(){
+   this.state.loggedIn&&this.login()
+ }
+  login(){
+    
   const chatManager = new ChatManager({
     instanceLocator: instanceLocator,
     userId: this.state.roomAndUser.user,
@@ -51,8 +57,7 @@ class App extends React.Component{
   })
   })
   
- }
-  
+  }
  sendMessage(text) {
   this.currentUser.sendMessage({
       text,
@@ -95,8 +100,8 @@ changeRoom(id){
   objDiv.scrollTop = 1000;
     return(
     <div className='app'>
-      <ChatList changeRoom={this.changeRoom} current={this.state.roomAndUser.roomId} user={this.state.user}/>
-      <MessageList  userId={this.state.user.id} messages={this.state.messages}/>
+      <ChatList changeRoom={this.changeRoom} loggedIn={this.state.loggedIn} current={this.state.roomAndUser.roomId} user={this.state.user}/>
+      {this.state.loggedIn?<MessageList  userId={this.state.user.id} messages={this.state.messages}/>:<LoginForm/>}
       <CreateChat/>
       <TextField sendMessage={this.sendMessage}/>
     </div>)
