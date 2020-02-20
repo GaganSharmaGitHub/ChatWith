@@ -21,11 +21,15 @@ class TextField extends React.Component{
     render(){
         return(
             <div className="textField">
+            
             <input type="text" 
-             placeholder="type message......." onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+             placeholder="Type message......." onChange={this.handleChange}
             value={this.state.value}
             ></input>
-            <button className='send' onClick={this.handleSubmit}>Send</button></div>
+            
+            <button className='send' onClick={this.handleSubmit}>Send</button>
+            </div>
         )
     }
 }

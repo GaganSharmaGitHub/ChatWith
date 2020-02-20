@@ -8,7 +8,8 @@ console.log(p)
     { 
         return(
             <div className='chatList'><h3>ChatWith</h3>
-            Welcome Back! {this.props.user.id}<br></br>
+            <i class="fa fa-cog"></i> Settings
+            <p>Welcome Back! {this.props.user.id}</p>
             Your Chats:
             <ul>
             {(Array.isArray(this.props.user.rooms))?this.props.user.rooms.map(item=><RoomListItem key={item.id} changeRoom={this.props.changeRoom} current={this.props.current} item={item} />):" " }
