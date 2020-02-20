@@ -7,11 +7,11 @@ console.log(p)
    render()
     { 
         return(
-            <div className='chatList'><h3>ChatsApp</h3>
+            <div className='chatList'><h3>ChatWith</h3>
             Welcome Back! {this.props.user.id}<br></br>
             Your Chats:
             <ul>
-            {(Array.isArray(this.props.user.rooms))?this.props.user.rooms.map(item=><RoomListItem changeRoom={this.props.changeRoom} current={this.props.current} item={item} />):" " }
+            {(Array.isArray(this.props.user.rooms))?this.props.user.rooms.map(item=><RoomListItem key={item.id} changeRoom={this.props.changeRoom} current={this.props.current} item={item} />):" " }
             </ul>
             <div>
       {/*this.props.chatkit.isLoading? 'Connecting to Chatkit...': `Hello ${this.props.chatkit.currentUser.name}!`*/}

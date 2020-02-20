@@ -2,7 +2,6 @@ import React from 'react'
 import Message from './message'
 import Loader from './loader'
 function MessageList(props){
-    console.log(props.messages.length==0)
         return(
             <div className='messageList'>
             
