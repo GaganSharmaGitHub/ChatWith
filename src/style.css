@@ -6,6 +6,7 @@
   --text-two:black;
   --Gradient:linear-gradient(to left, var(--color-two), var(--color-one));
 }
+/*nocommit*/
 body{
   margin: 0px;
   padding: 0px;
