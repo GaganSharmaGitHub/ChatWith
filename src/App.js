@@ -7,7 +7,12 @@ import CreateChat from './components/createChat'
 import LoginForm from './components/loginForm'
 import TextField from './components/textField.js'
 import{tokenURL, instanceLocator}from './config'
-var roomId='1044687d-e917-4c04-857b-dd89a67fa2eb'
+var roomId='a73200ff-8d1a-40fd-a637-b41143761a8b'
+function scrollToBottom() {
+  var objDiv = document.getElementsByClassName('messageList');
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+
 class App extends React.Component{
  constructor(){
    super()
@@ -22,16 +27,19 @@ class App extends React.Component{
    }
 
    this.sendMessage = this.sendMessage.bind(this)
+   this.login = this.login.bind(this)
    this.changeRoom = this.changeRoom.bind(this)
  }
  componentDidMount(){
-   this.state.loggedIn&&this.login()
+   this.state.loggedIn&&this.login(this.state.roomAndUser.user)
  }
-  login(){
-    
+  login(x){
+    this.setState(()=>({loggedIn:true}))
+    this.setState(()=>({roomAndUser:{roomId:this.state.roomAndUser.roomId,
+    user:x}}))
   const chatManager = new ChatManager({
     instanceLocator: instanceLocator,
-    userId: this.state.roomAndUser.user,
+    userId: x,
     tokenProvider: new TokenProvider({ url: tokenURL })
   })
   chatManager.connect()
@@ -56,7 +64,7 @@ class App extends React.Component{
     messageLimit: 10
   })
   })
-  
+  console.log(this.state)
   }
  sendMessage(text) {
   this.currentUser.sendMessage({
@@ -91,8 +99,7 @@ changeRoom(id){
     messageLimit: 10
   })
   })
-  
-  
+  setTimeout(scrollToBottom,3000)
 }
   render(){//console.log(this.state.user.id)
    
@@ -101,7 +108,7 @@ changeRoom(id){
     return(
     <div className='app'>
       <ChatList changeRoom={this.changeRoom} loggedIn={this.state.loggedIn} current={this.state.roomAndUser.roomId} user={this.state.user}/>
-      {this.state.loggedIn?<MessageList  userId={this.state.user.id} messages={this.state.messages}/>:<LoginForm/>}
+      {this.state.loggedIn?<MessageList  userId={this.state.user.id} messages={this.state.messages}/>:<LoginForm login={this.login} user={this.state.roomAndUser.user}/>}
       <CreateChat/>
       <TextField sendMessage={this.sendMessage}/>
     </div>)

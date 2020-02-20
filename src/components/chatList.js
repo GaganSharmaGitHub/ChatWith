@@ -11,7 +11,6 @@ console.log(p)
             <div className='chatList'>
           {this.props.loggedIn?(<div>
             <h3>ChatWith</h3>
-            <i class="fa fa-cog"></i> Settings
             <p>Welcome Back! {this.props.user.id}</p>
             Your Chats:
             <ul>

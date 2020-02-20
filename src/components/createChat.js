@@ -2,7 +2,7 @@ import React from 'react'
 class CreateChat extends React.Component{
     render(){
         return(
-            <div className='createChat'><button>Create Chat+</button></div>
+            <div className='createChat'><button>Join Rooms</button></div>
         )
     }
 }
