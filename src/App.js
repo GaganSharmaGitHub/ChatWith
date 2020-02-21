@@ -1,6 +1,5 @@
 import React from 'react'
 import MessageList from './components/messagelList'
-import Loader from './components/loader'
 import ChatList from './components/chatList'
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
 import CreateChat from './components/createChat'
